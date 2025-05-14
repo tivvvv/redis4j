@@ -1,5 +1,6 @@
 package com.tiv.server.impl;
 
+import com.tiv.handler.StringHandler;
 import com.tiv.server.RedisServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -43,6 +44,7 @@ public class RedisServerImpl implements RedisServer {
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         pipeline.addLast(new StringDecoder());
+                        pipeline.addLast(new StringHandler());
                         pipeline.addLast(new StringEncoder());
                     }
                 });
